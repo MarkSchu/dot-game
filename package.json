@@ -4,7 +4,9 @@
   "description": "Mark Schumaker's dev site",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "netlify dev"
   },
   "author": "Mark Schumaker",
   "license": "ISC",
