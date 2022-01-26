@@ -1,5 +1,5 @@
 import { element } from 'utils/dom';
-import { Menu } from 'pages/shared';
+import { Menu, HeaderMenu } from 'pages/shared';
 import 'pages/style.css';
 
 const options = [
@@ -33,6 +33,7 @@ export default function HomePage() {
   return (
     element('div', {className: 'page'},
       element('div', {},
+        HeaderMenu(),
         element('h1', {className: 'title', textContent: 'Mark Schumaker'}),
         element('p', {className: 'text', textContent: "I'm a front-end developer living in Austin, TX. 🌮"}),
         Menu(options)
