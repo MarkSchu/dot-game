@@ -16,7 +16,7 @@ function Boxes() {
 
 export default function Rotation1() {
   return (
-    element('div', {},
+    element('div', {className: 'rotation1'},
       Boxes()
     )
   )

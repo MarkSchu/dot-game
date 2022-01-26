@@ -4,6 +4,7 @@ import AboutPage from 'pages/about';
 import ContactPage from 'pages/contact';
 import ExperimentsPage from 'pages/experiments';
 import { getExperiment } from 'utils/experiments/get-experiment';
+import 'pages/style.css';
 
 function NotFound() {
   return (

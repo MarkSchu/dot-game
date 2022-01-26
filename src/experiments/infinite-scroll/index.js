@@ -63,6 +63,6 @@ function InfiniteScrollPage() {
 
 export default function InfiniteScroll() {
   return (
-    element('div', {})
+    element('div', {className: 'infinite-scroll'})
   )
 }

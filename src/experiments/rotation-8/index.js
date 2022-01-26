@@ -36,7 +36,8 @@ function Circles() {
 
 export default function Rotation8() {
   return (
-    element('div', {},
+    element('div', {className: 'rotation8'},
+      Circles()
     )
   )
 }

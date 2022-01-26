@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 .page {
   display: flex;
   justify-content: center;
@@ -13,11 +17,20 @@
 }
 
 .page .text,
-.page .option a {
+.page .menu .option a {
   font-size: 16px;
   line-height: 1.5;
 }
 
-.page .option a {
+.page .menu .option a {
+  text-decoration: none;
+}
+
+.page .header-menu {
+  margin-bottom: 60px;
+}
+
+.page .header-menu a {
+  margin-right: 12px;
   text-decoration: none;
 }

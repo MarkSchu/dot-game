@@ -1,4 +1,4 @@
-import { element } from 'utils/dom';
+import { element, repeatfor } from 'utils/dom';
 import './style.css';
 
 // #2d728f #3B8EA5
@@ -43,7 +43,8 @@ function Circles() {
 
 export default function Rotation7() {
   return (
-    element('div', {},
+    element('div', {className: 'rotation7'},
+      Circles()
     )
   )
 }

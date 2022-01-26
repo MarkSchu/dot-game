@@ -1,5 +1,4 @@
 import { element, repeat } from 'utils/dom';
-import './style.css';
 
 function Option(item) {
   return (
@@ -14,7 +13,7 @@ function Option(item) {
 
 export function Menu(options) {
   return (
-    element('div', {},
+    element('div', {className: 'menu'},
       repeat(options, Option)
     )
   )

@@ -1,8 +1,4 @@
-body {
-  margin: 0;
-}
-
-.inner {
+.rotation3 .inner {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -45,6 +41,6 @@ body {
   }
 }
 
-.box {
+.rotation3 .box {
   position: absolute;
 }
