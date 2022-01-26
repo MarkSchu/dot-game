@@ -1,5 +1,5 @@
 import { element } from 'utils/dom';
-import { Menu } from 'pages/shared';
+import { Menu, HeaderMenu } from 'pages/shared';
 
 const options = [
   {
@@ -81,9 +81,9 @@ export default function AboutPage() {
     element('div', {className: 'page'},
       element('div', {},
         HeaderMenu(),
-        element('h1', {textContent: 'About'}),
-        element('p', {textContent: 'Hey, my name is Mark Schumaker. 👋'}),
-        element('p', {textContent: 'I currently work at Zello in Austin, TX. Here are some of the tools that I use:'}),
+        element('h1', {className: 'title', textContent: 'About'}),
+        element('p', {className: 'text', textContent: 'Hey, my name is Mark Schumaker. 👋'}),
+        element('p', {className: 'text', textContent: 'I currently work at Zello in Austin, TX. Here are some of the tools that I use:'}),
         Menu(options)
       )
     )

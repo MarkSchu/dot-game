@@ -7,8 +7,8 @@ export default function ExperimentsPage() {
   return (
     element('div', {className: 'page'},
       element('div', {},
-        element('h1', {textContent: 'Experiments'}),
-        element('p', {textContent: 'These are some of my experiments. I mostly play around with vanilla JavaScript and CSS.'}),
+        element('h1', {className: 'title', textContent: 'Experiments'}),
+        element('p', {className: 'text', textContent: 'These are some of my experiments. I mostly play around with vanilla JavaScript and CSS.'}),
         Menu(experimentList)
       )
     )

@@ -18,3 +18,13 @@ export function Menu(options) {
     )
   )
 }
+
+export function HeaderMenu() {
+  return (
+    element('div', {},
+      element('span', {textContent: '&gt;'}),
+      element('span', {textContent: '👋'}),
+      element('span', {textContent: '🧪'})
+    )
+  )
+}
