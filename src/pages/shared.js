@@ -2,9 +2,9 @@ import { element, repeat } from 'utils/dom';
 
 function Option(item) {
   return (
-    element('div', {},
+    element('div', {className: 'option'},
       element('a', {
-        textContent: item.name,
+        textContent: `-- ${item.name}`,
         href: item.href
       })
     )
