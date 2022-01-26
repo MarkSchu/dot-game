@@ -18,39 +18,40 @@ function getPath(filename) {
   return `experiments/${filename}`;
 }
 
-let experimentDir = path.resolve(__dirname, 'src/experiments');
-let outputFileName = 'get-experiment.js';
-let filenames = fs.readdirSync(experimentDir);
+const experimentsDirectory = path.resolve(__dirname, 'src/experiments');
+const outputDirectory = path.resolve(__dirname, 'src/utils/experiments');
+const filenames = fs.readdirSync(experimentsDirectory);
 let importStatements = '';
-let conditionStatements = '';
+let conditionalStatements = '';
+let objectExpressions = '';
 
 filenames.forEach((filename) => {
-
-  if (filename === outputFileName) {
-    return;
-  }
-
   const name = getName(filename);
   const component = getComponent(filename);
   const path = getPath(filename);
-
   importStatements += `import ${component} from '${path}';\n`;
-  conditionStatements += (
-`
+  conditionalStatements += (`
   if ('${path}') {
     return ${component};
-  }
-`)
+  }`);
+  objectExpressions += (`
+    {
+      name: '${name}',
+      path: '${path}'
+    },\n`);
 });
 
-const dataContent = (
-  importStatements
-  + '\n'
-  + 'export function getExperiment(path) {'
-  + '\n'
-  + conditionStatements
-  + '};'
-);
+const getFileStr = (
+`${importStatements}
 
+export function getExperiment(path) {
+  ${conditionalStatements}
+}`);
 
-fs.writeFileSync(experimentDir + '/' + outputFileName, dataContent);
+const listFileStr = (
+`export const experimentList = [
+  ${objectExpressions}
+]`);
+
+fs.writeFileSync(`${outputDirectory}/get-experiment.js`, getFileStr);
+fs.writeFileSync(`${outputDirectory}/list.js`, listFileStr);

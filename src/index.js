@@ -3,7 +3,7 @@ import HomePage from 'pages/home';
 import AboutPage from 'pages/about';
 import ContactPage from 'pages/contact';
 import ExperimentsPage from 'pages/experiments';
-import { getExperiment } from 'experiments/get-experiment';
+import { getExperiment } from 'utils/experiments/get-experiment';
 
 function NotFound() {
   return (
