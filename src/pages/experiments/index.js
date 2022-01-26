@@ -9,7 +9,8 @@ export default function ExperimentsPage() {
         HeaderMenu(),
         element('h1', {className: 'title', textContent: 'Experiments'}),
         element('p', {className: 'text', textContent: 'These are some of my experiments. I mostly play around with vanilla JavaScript and CSS. 🧪'}),
-        Menu(experimentList)
+        // Menu(experimentList)
+        element('div', {textContent: '🚧 Under Construction 🚧'})
       )
     )
   )
