@@ -31,13 +31,13 @@ filenames.forEach((filename) => {
   const path = getPath(filename);
   importStatements += `import ${component} from '${path}';\n`;
   conditionalStatements += (`
-  if ('${path}') {
-    return ${component};
+  if (path === '/${path}') {
+    return ${component}();
   }`);
   objectExpressions += (`
     {
       name: '${name}',
-      path: '${path}'
+      href: '${path}'
     },\n`);
 });
 

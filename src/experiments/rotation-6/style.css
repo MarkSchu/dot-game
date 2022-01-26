@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+}
+
+.inner {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.box {
+  position: absolute;
+}

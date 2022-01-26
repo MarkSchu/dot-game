@@ -1,5 +1,6 @@
 import { element } from 'utils/dom';
 import { Menu, HeaderMenu } from 'pages/shared';
+import 'pages/style.css';
 
 const options = [
   {
