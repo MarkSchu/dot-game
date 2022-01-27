@@ -1,11 +1,11 @@
 import { element } from 'utils/dom';
-import { Game } from 'game';
+import { Loop } from 'loop';
 import './style.css';
 
 export function ControlPanel() {
 
   const handleClick = () => {
-    Game.data.running ? Game.stop() : Game.start();
+    Loop.data.running ? Loop.stop() : Loop.start();
   }
 
   return (
@@ -17,12 +17,3 @@ export function ControlPanel() {
     )
   )
 }
-
-export function GamePlayArea() {
-  return (
-    element('div', {className: 'dot-area'},
-
-    )
-  )
-}
-
