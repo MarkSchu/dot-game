@@ -10,8 +10,8 @@ module.exports = {
   resolve: {
     alias: {
       utils: path.resolve(__dirname, 'src/utils'),
-      experiments: path.resolve(__dirname, 'src/experiments'),
-      pages: path.resolve(__dirname, 'src/pages'),
+      ui: path.resolve(__dirname, 'src/ui'),
+      game: path.resolve(__dirname, 'src/game'),
     }
   },
   optimization: {

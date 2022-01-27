@@ -56,10 +56,10 @@ export function bind(state, callback) {
   return oldChildren;
 }
 
-export function bindtext(state, topic, el) {
-  el.textContet = state.data[topic];
-  state.on(topic, () => {
-    el.textContet = state.data[topic];
+export function bindtext(state, topic) {
+  const el = element('span', {textContent: state.data[topic]});
+  state.on(topic, (_, data) => {
+    el.textContent = data[topic];
   });
   return el;
 }
