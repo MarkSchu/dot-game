@@ -28,6 +28,42 @@ export function repeatfor(n, createElement) {
   return children;
 }
 
+function removeChildren(parent, children) {
+  children.forEach((child) => {
+    parent.removeChild(child);
+  });
+}
+
+function addChildren(parent, children) {
+  children.forEach(child => parent.appendChild(child));
+}
+
+function toListOfChildren(children) {
+  return [children].flat();
+}
+
+export function bind(state, callback) {
+  let oldChildren = toListOfChildren(callback(state, state.data));
+  state.on('*', () => {
+    let newChildren = toListOfChildren(callback(state, state.data));
+    let parent = oldChildren[0].parentElement;
+    if (parent) {
+      removeChildren(parent, oldChildren);
+      addChildren(parent, newChildren);
+    }
+    oldChildren = newChildren;
+  });
+  return oldChildren;
+}
+
+export function bindtext(state, topic, el) {
+  el.textContet = state.data[topic];
+  state.on(topic, () => {
+    el.textContet = state.data[topic];
+  });
+  return el;
+}
+
 export function onpathchange(callback) {
   let oldEl = callback(window.location.pathname);
   window.addEventListener('popstate', () => {

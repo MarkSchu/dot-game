@@ -1,44 +1,45 @@
-import { element, onpathchange } from 'utils/dom';
-import HomePage from 'pages/home';
-import AboutPage from 'pages/about';
-import ContactPage from 'pages/contact';
-import ExperimentsPage from 'pages/experiments';
-import { getExperiment } from 'utils/experiments/get-experiment';
-import 'pages/style.css';
+import { element } from 'utils/dom';
+import { Observable } from 'utils/observable';
+import { start, stop, isRunning } from './game';
+import './style.css';
 
-function NotFound() {
+
+function ControlPanel() {
+
+  const handleClick = () => {
+    isRunning() ? stop() : start();
+  }
+
   return (
-    element('div', {textContent: 'Not found!!!'})
+    element('div', {},
+      element('button', {
+        textContent: 'Start', 
+        onclick: handleClick
+      })
+    )
+  )
+}
+
+function GamePlayArea() {
+  return (
+    element('div', {className: 'game-play-area'},
+      element('div', {textContent: 'dev data'})
+    )
   )
 }
 
 function App() {
+
+  const state = new Observable({
+    running: false,
+    points: 0,
+    speed: 0
+  });
+
   return (
     element('div', {},
-      onpathchange((path) => {
-
-        if (path === '/') {
-          return HomePage();
-        }
-
-        if (path === '/about') {
-          return AboutPage();
-        }
-
-        if (path === '/contact') {
-          return ContactPage();
-        }
-
-        if (path === '/experiments') {
-          return ExperimentsPage();
-        }
-
-        if (path.startsWith('/experiments')) {
-          return getExperiment(path);
-        }
-
-        return NotFound();
-      })
+      ControlPanel(),
+      GamePlayArea(state)
     )
   )
 }
