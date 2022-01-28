@@ -1,12 +1,15 @@
 import { element } from 'utils/dom';
-import { ControlPanel, GamePlayArea } from 'ui';
+import { ControlPanel } from './ui/ControlPanel';
+import { GamePlayArea } from './ui/GamePlayArea';
 import { Loop } from './loop';
-import { render } from './renderer';
+import { Game } from './game';
+import { Renderer } from './renderer';
+import './style.css';
 
 function App() {
   return (
-    element('div', {},
-      ControlPanel(Game, Loop),
+    element('div', {className: 'app'},
+      ControlPanel(Loop, Game),
       GamePlayArea(Renderer)
     )
   )

@@ -1,0 +1,25 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+svg {
+  flex-grow: 1;
+  border: 1px solid black;
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  background-color: black;
+  height: 10px;
+  width: 10px;
+}

@@ -1,6 +1,6 @@
 import { Observable } from 'utils/observable';
 import { Game } from '../game';
-import { render } from '../renderer';
+import { Renderer } from '../renderer';
 
 export const Loop = new Observable({
   running: false,
@@ -20,10 +20,10 @@ Loop.stop = function() {
 }
 
 Loop.cycle = function(loopTime) {
-
   // skip the first loop to avoid undefined vars
   if (!Loop.lastLoopTime) {
     Loop.lastLoopTime = loopTime;
+    window.requestAnimationFrame(Loop.cycle);
     return;
   }
   // pre update
@@ -31,13 +31,14 @@ Loop.cycle = function(loopTime) {
   const timeSinceLastSecond = Loop.timeSinceLastSecond + timeBetweenLoops;
   const fps = 1 / ((loopTime - Loop.lastLoopTime) / 1000);
 
-  update(timeSinceLastSecond, fps);
-  render(Game.dots);
+  Game.update(timeSinceLastSecond, fps);
+  Renderer.render(Game.dots);
 
   Loop.lastLoopTime = loopTime;
   Loop.timeSinceLastSecond = timeSinceLastSecond >= 1000 ? 0 : timeSinceLastSecond;
+
   if (Loop.data.running)
-    window.requestAnimationFrame(Loop.loop);
+    window.requestAnimationFrame(Loop.cycle);
   else 
     Loop.lastLoopTime = null;
 }

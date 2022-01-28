@@ -1,8 +1,8 @@
 import { element } from 'utils/dom';
-import './style.css';
+import { svg } from 'utils/svg';
 
 export function GamePlayArea(Renderer) {
-  const el = element('div', {className: 'dot-area'});
+  const el = svg('svg', {});
   Renderer.setRenderArea(el);
   return el;
 }
