@@ -1,10 +1,12 @@
 import { svg } from 'utils/svg';
+import { Game } from '../game';
 
 export const Renderer = {}
 
 
 Renderer.createDotSvg = function(dot) {
-  return (
+
+  const el = (
     svg('circle', {
       cx: dot.x,
       cy: dot.y,
@@ -12,6 +14,13 @@ Renderer.createDotSvg = function(dot) {
       fill: '#5cceee'
     })
   )
+
+  el.onclick = (e) => {
+    Game.removeDot(dot);
+    el.parentElement.removeChild(el);
+  }
+
+  return el;
 }
 
 Renderer.setRenderArea = function(el) {

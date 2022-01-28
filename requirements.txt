@@ -21,7 +21,9 @@ dots should fall at a speed of 10px per second, and at the slider's right-most
 position, should fall at a speed of 100px per second.
 
 - A new dot appears at a random horizontal position at the top of the box
-every second. A dot should not "hang" off the left or right edge of the screen.
+every second. 
+
+- A dot should not "hang" off the left or right edge of the screen.
 
 - Dots should vary randomly in size from 10px in diameter to 100px in diameter.
 
