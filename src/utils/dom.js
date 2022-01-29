@@ -56,6 +56,20 @@ export function bind(state, callback) {
   return oldChildren;
 }
 
+export function bindto(state, topic, callback) {
+  let oldChildren = toListOfChildren(callback(state.data[topic]));
+  state.on('*', () => {
+    let newChildren = toListOfChildren(callback(state.data[topic]));
+    let parent = oldChildren[0].parentElement;
+    if (parent) {
+      removeChildren(parent, oldChildren);
+      addChildren(parent, newChildren);
+    }
+    oldChildren = newChildren;
+  });
+  return oldChildren;
+}
+
 export function bindtext(state, topic) {
   const el = element('span', {textContent: state.data[topic]});
   state.on(topic, (_, data) => {

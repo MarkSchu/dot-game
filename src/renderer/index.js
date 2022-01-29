@@ -1,5 +1,6 @@
 import { svg } from 'utils/svg';
 import { Game } from '../game';
+import { Loop } from '../loop';
 
 export const Renderer = {}
 
@@ -16,11 +17,18 @@ Renderer.createDotSvg = function(dot) {
   )
 
   el.onclick = (e) => {
-    Game.removeDot(dot);
-    el.parentElement.removeChild(el);
+    if (Loop.data.running) {
+      Game.addPoints(dot.points)
+      Game.removeDot(dot);
+      Renderer.removeDotSvg(el);
+    }
   }
 
   return el;
+}
+
+Renderer.removeDotSvg = function(el) {
+  el.parentElement.removeChild(el);
 }
 
 Renderer.setRenderArea = function(el) {

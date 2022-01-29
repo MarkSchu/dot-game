@@ -2,25 +2,50 @@ import { Observable } from 'utils/observable';
 import { Renderer } from '../renderer';
 
 
-export const Game = new Observable();
+export const Game = new Observable({
+  points: 0
+});
 
+// constants
+Game.minSpeed = 10; 
+Game.maxSpeed = 100;
+Game.minRadius = 5;
+Game.maxRadius = 50;
+
+// state
 Game.dots = [];
 Game.speed = 10;
 
+Game.setSpeed = function(value) {
+  Game.speed = value;
+}
+
 Game.getRandomRadius = function() {
-  return Math.floor(5 + (Math.random() * 50));
+  return Math.floor(Game.minRadius + (Math.random() * Game.maxRadius));
 }
 
 Game.getRandomXCoord = function(radius) {
   const renderAreaWidth = Renderer.getRenderAreaWidth();
-  return Math.floor(radius + (Math.random() * (renderAreaWidth - (2 * radius))));
+  return Math.floor(radius + (Math.random() * (renderAreaWidth - (radius * 2))));
+}
+
+Game.getPoints = function(radius) {
+  const minDiameter = Game.minRadius * 2;
+  const maxDiameter = Game.maxRadius * 2;
+  const diameter = radius * 2;
+  return (minDiameter + maxDiameter) - diameter;
+}
+
+Game.addPoints = function(points) {
+  Game.set({points: Game.data.points + points});
 }
 
 Game.addDot = function() {
   const radius = Game.getRandomRadius();
   const x = Game.getRandomXCoord(radius);
   const y = -radius;
-  Game.dots.push({ x, y, radius })
+  const points = Game.getPoints(radius);
+  Game.dots.push({ x, y, radius, points })
 }
 
 Game.removeDot = function(dot) {

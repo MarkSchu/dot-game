@@ -15,9 +15,13 @@ Building the Game
 at that point, the Start button changes to a Pause button, which should
 pause the game until the button is touched or clicked again.
 
-- Dots fall at a constant rate. A player should be able to use a slider
-to control the rate at which dots fall; at the slider's left-most position,
-dots should fall at a speed of 10px per second, and at the slider's right-most
+- Dots fall at a constant rate. 
+
+- A player should be able to use a slider to control the rate at which 
+dots fall; 
+
+- at the slider's left-most position, dots should fall at a speed of 
+10px per second, and at the slider's right-most
 position, should fall at a speed of 100px per second.
 
 - A new dot appears at a random horizontal position at the top of the box
