@@ -1,15 +1,15 @@
 import { element, bindtext, bindto } from 'utils/dom';
-import { Game } from '../game';
 
-function PointDisplay() {
+function PointDisplay(Game) {
   return (
-    element('div', {},
+    element('div', {className: 'point-display'},
       bindtext(Game, 'points')
     )
   )
 }
 
-function StartButton(Loop, Game) {
+function StartButton(Loop) {
+
   const handleClick = (e) => {
     Loop.data.running ? Loop.stop() : Loop.start();
   }
@@ -17,21 +17,15 @@ function StartButton(Loop, Game) {
   return (
     bindto(Loop, 'running', (value) =>
       element('button', {
+        className: 'start-button',
         textContent: value ? 'Pause' : 'Start', 
         onclick: handleClick
       })
     )
   )
-
-  return (
-    element('button', {
-      textContent: 'Start', 
-      onclick: handleClick
-    })
-  )
 }
 
-function SpeedSlider() {
+function SpeedSlider(Game) {
 
   const handleChange = (e) => {
     Game.setSpeed(e.target.value);
@@ -39,6 +33,7 @@ function SpeedSlider() {
   
   return (
     element('input', {
+      className: 'speed-slider',
       type: 'range',
       min: Game.minSpeed,
       max: Game.maxSpeed,
@@ -55,7 +50,10 @@ export function ControlPanel(Loop, Game) {
         PointDisplay(Game),
         StartButton(Loop, Game)
       ),
-      SpeedSlider(Game),
+      element('div', {},
+        SpeedSlider(Game),
+        element('div', {textContent: 'Speed'})
+      )
     )
   )
 }
