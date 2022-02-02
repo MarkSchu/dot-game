@@ -1,0 +1,118 @@
+.control-panel-container {
+  position: relative;
+  height: 155px;
+  margin-top: 16px;
+}
+
+.control-panel {
+  border: 1px solid #00ffff;
+  filter: drop-shadow(0 0 6px aqua);
+  color: #00ffff;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 8px;
+  right: 8px;
+  padding: 24px 32px;
+  transition: 
+    left 0.25s ease-out, 
+    right 0.25s ease-out, 
+    top 0.5s ease-out 0.25s, 
+    bottom 0.5s ease-out 0.25s,
+    padding 1s ease-out 0.75s; 
+}
+
+.control-panel.closed {
+  top: 45%;
+  bottom: 45%;
+  left: 45%;
+  right: 45%;
+  padding: 0;
+}
+
+.control-panel.closed .top-row,
+.control-panel.closed .bottom-row {
+  opacity: 0;
+}
+
+.control-panel .top-row,
+.control-panel .bottom-row {
+  transition: opacity 1s ease-out 0.75s;
+  opacity: 1;
+}
+
+.control-panel .border-top-right {
+    background-color: aqua;
+    position: absolute;
+    width: 50%;
+    height: 8px;
+    top: -8px;
+    right: -1px;
+    clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%);
+    /* filter: drop-shadow(0 0 5px aqua); */
+}
+
+.control-panel .border-bottom-left {
+  background-color: aqua;
+    position: absolute;
+    width: 50%;
+    height: 8px;
+    bottom: -8px;
+    left: -1px;
+    filter: drop-shadow(0 0 15px aqua);
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+    /* filter: drop-shadow(0 0 5px aqua); */
+}
+
+.control-panel .top-row,
+.control-panel .bottom-row {
+  position: relative;
+}
+
+.control-panel .top-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  align-items: center;
+}
+
+.control-panel .point-display,
+.control-panel .start-button,
+.control-panel .speed-label,
+.control-panel .speed-slider {
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ffff;
+}
+
+.control-panel .point-display {
+  font-size: 40px;
+  font-weight: bold;
+  border-bottom: 1px dashed;
+}
+
+.control-panel .speed-slider {
+  display: block;
+  width: 100%;
+  -webkit-appearance: none;
+  background-color: #00ffff;
+  height: 1px;;
+  margin-bottom: 8px;
+}
+
+.control-panel .speed-label {
+  display: block;
+}
+
+.control-panel .start-button {
+  background-color: black;
+  border: 3px solid #00ffff;
+  padding: 8px 16px;
+  border-radius: 2px;
+}
+
+.control-panel .speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 3px;
+  background: #00ffff;
+ }

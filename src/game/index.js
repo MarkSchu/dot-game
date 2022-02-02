@@ -14,7 +14,7 @@ Game.maxRadius = 50;
 
 // state
 Game.dots = [];
-Game.speed = 10;
+Game.speed = 100; // [10, 100]
 
 Game.setSpeed = function(value) {
   Game.speed = value;

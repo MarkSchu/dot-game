@@ -9,10 +9,14 @@ Renderer.createDotSvg = function(dot) {
 
   const el = (
     svg('circle', {
+      class: 'dot-1',
       cx: dot.x,
       cy: dot.y,
       r: dot.radius,
-      fill: '#5cceee'
+      fill: 'black',
+      stroke: '#00ffff',
+      'stroke-dasharray': "10.71, 5" ,
+      'stroke-width': 4
     })
   )
 

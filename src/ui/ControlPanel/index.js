@@ -1,4 +1,5 @@
 import { element, bindtext, bindto } from 'utils/dom';
+import './style.css';
 
 function PointDisplay(Game) {
   return (
@@ -37,23 +38,38 @@ function SpeedSlider(Game) {
       type: 'range',
       min: Game.minSpeed,
       max: Game.maxSpeed,
-      value: Game.minSpeed,
+      value: Game.speed,
       oninput: handleChange
     })
   )
 }
 
 export function ControlPanel(Loop, Game) {
-  return (
-    element('div', {className: 'control-panel'},
-      element('div', {},
-        PointDisplay(Game),
-        StartButton(Loop, Game)
-      ),
-      element('div', {},
-        SpeedSlider(Game),
-        element('div', {textContent: 'Speed'})
+  let el = (
+    element('div', {className: 'control-panel-container'},
+      element('div', {className: 'control-panel closed'},
+        element('div', {className: 'border-top-right'}),
+        element('div', {className: 'border-bottom-left'}),
+        element('div', {className: 'top-row'},
+          PointDisplay(Game),
+          StartButton(Loop, Game)
+        ),
+        element('div', {className: 'bottom-row'},
+          SpeedSlider(Game),
+          element('div', {
+            textContent: 'speed',
+            className: 'speed-label'
+          })
+        )
       )
     )
-  )
+  );
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelector('.control-panel').classList.remove('closed');
+    }, 500)
+  });
+
+  return el;
 }
