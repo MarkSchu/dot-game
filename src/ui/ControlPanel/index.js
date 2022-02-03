@@ -45,7 +45,14 @@ function SpeedSlider(Game) {
 }
 
 export function ControlPanel(Loop, Game) {
-  let el = (
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelector('.control-panel').classList.remove('closed');
+    }, 500)
+  });
+
+  return (
     element('div', {className: 'control-panel-container'},
       element('div', {className: 'control-panel closed'},
         element('div', {className: 'border-top-right'}),
@@ -63,13 +70,5 @@ export function ControlPanel(Loop, Game) {
         )
       )
     )
-  );
-
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      document.querySelector('.control-panel').classList.remove('closed');
-    }, 500)
-  });
-
-  return el;
+  )
 }

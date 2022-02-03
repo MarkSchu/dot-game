@@ -1,19 +1,23 @@
 .control-panel-container {
+
+  --panel-margin: 8px;
+
   position: relative;
   height: 155px;
-  margin-top: 16px;
+  margin-top: calc(2 * var(--panel-margin));
+  z-index: 2;
 }
 
 .control-panel {
-  border: 1px solid #00ffff;
-  filter: drop-shadow(0 0 6px aqua);
-  color: #00ffff;
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 8px;
-  right: 8px;
+  left: var(--panel-margin);
+  right: var(--panel-margin);
   padding: 24px 32px;
+  border: 1px solid var(--interface-color);
+  filter: drop-shadow(0 0 6px var(--interface-color));
+  color: var(--interface-color);
   transition: 
     left 0.25s ease-out, 
     right 0.25s ease-out, 
@@ -30,38 +34,35 @@
   padding: 0;
 }
 
-.control-panel.closed .top-row,
-.control-panel.closed .bottom-row {
-  opacity: 0;
-}
-
 .control-panel .top-row,
 .control-panel .bottom-row {
   transition: opacity 1s ease-out 0.75s;
   opacity: 1;
 }
 
+.control-panel.closed .top-row,
+.control-panel.closed .bottom-row {
+  opacity: 0;
+}
+
+.control-panel .border-top-right,
+.control-panel .border-bottom-left {
+  position: absolute;
+  background-color: var(--interface-color);
+  width: 50%;
+  height: var(--panel-margin)
+}
+
 .control-panel .border-top-right {
-    background-color: aqua;
-    position: absolute;
-    width: 50%;
-    height: 8px;
-    top: -8px;
+    top: calc(-1 * var(--panel-margin));
     right: -1px;
     clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%);
-    /* filter: drop-shadow(0 0 5px aqua); */
 }
 
 .control-panel .border-bottom-left {
-  background-color: aqua;
-    position: absolute;
-    width: 50%;
-    height: 8px;
-    bottom: -8px;
+    bottom: calc(-1 * var(--panel-margin));
     left: -1px;
-    filter: drop-shadow(0 0 15px aqua);
     clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
-    /* filter: drop-shadow(0 0 5px aqua); */
 }
 
 .control-panel .top-row,
@@ -72,7 +73,7 @@
 .control-panel .top-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 32px;
+  margin-bottom: calc(4 * var(--panel-margin));
   align-items: center;
 }
 
@@ -81,7 +82,7 @@
 .control-panel .speed-label,
 .control-panel .speed-slider {
   font-family: 'Courier New', Courier, monospace;
-  color: #00ffff;
+  color: var(--interface-color);
 }
 
 .control-panel .point-display {
@@ -94,9 +95,9 @@
   display: block;
   width: 100%;
   -webkit-appearance: none;
-  background-color: #00ffff;
-  height: 1px;;
-  margin-bottom: 8px;
+  background-color: var(--interface-color);
+  height: 1px;
+  margin-bottom: var(--panel-margin);
 }
 
 .control-panel .speed-label {
@@ -105,14 +106,23 @@
 
 .control-panel .start-button {
   background-color: black;
-  border: 3px solid #00ffff;
+  border: 3px solid var(--interface-color);
   padding: 8px 16px;
   border-radius: 2px;
+  cursor: pointer;
+}
+
+.control-panel .start-button:hover {
+  filter: drop-shadow(0 0 4px white);
+}
+
+.control-panel .start-button:active {
+  filter: drop-shadow(0 0 0px white);
 }
 
 .control-panel .speed-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 12px;
-  width: 3px;
-  background: #00ffff;
+  height: 16px;
+  width: 4px;
+  background: var(--interface-color);
  }

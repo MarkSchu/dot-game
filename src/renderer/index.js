@@ -7,9 +7,6 @@ export const Renderer = {}
 
 Renderer.renderArea = svg('svg', {class: 'game-play-area'});
 
-Renderer.PointCount = function(dot) {
-
-}
 
 Renderer.DotBorder = function(dot) {
   const r = dot.radius + 10;
@@ -78,7 +75,6 @@ Renderer.Dot = function (dot) {
     },
       Renderer.DotGlow(dot),
       Renderer.DotBorder(dot),
-      // Renderer.PointCount(dot)
     )
   );
 

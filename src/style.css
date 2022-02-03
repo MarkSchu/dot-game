@@ -1,3 +1,7 @@
+:root {
+  --interface-color: #00ffff;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,7 +20,3 @@ body {
   background-color: black;
 }
 
-.game-play-area {
-  flex-grow: 1;
-  position: relative;
-}
