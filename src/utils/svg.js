@@ -1,6 +1,10 @@
 function addAttrs(el, attrs) {
   for (const attr in attrs) {
-    el.setAttribute(attr, attrs[attr]);
+    if (attr === 'onclick') {
+      el[attr] = attrs[attr];
+    } else {
+      el.setAttribute(attr, attrs[attr]);
+    }
   }
 }
 

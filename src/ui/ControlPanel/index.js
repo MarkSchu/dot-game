@@ -44,13 +44,17 @@ function SpeedSlider(Game) {
   )
 }
 
-export function ControlPanel(Loop, Game) {
-
+function openControlPanel() {
   window.addEventListener('load', () => {
     setTimeout(() => {
       document.querySelector('.control-panel').classList.remove('closed');
     }, 500)
   });
+}
+
+export function ControlPanel(Loop, Game) {
+
+  openControlPanel();
 
   return (
     element('div', {className: 'control-panel-container'},
