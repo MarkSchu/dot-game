@@ -23,7 +23,7 @@ Renderer.DotBorder = function(dot) {
       cy: 0, 
       r,
       fill: 'transparent',
-      'stroke': 'aqua',
+      'stroke': document.documentElement.style.getProperty('--interface-color'),
       'stroke-width': 2,
       'stroke-dasharray': `${line1} ${gap1}`,
       opacity: 0.25
