@@ -1,3 +1,17 @@
+function addChildren(parent, children) {
+  children.forEach(child => parent.appendChild(child));
+}
+
+function removeChildren(parent, children) {
+  children.forEach((child) => {
+    parent.removeChild(child);
+  });
+}
+
+function toListOfChildren(children) {
+  return [children].flat();
+}
+
 function addAttrs(el, attrs) {
   for (const attr in attrs) {
     el[attr] = attrs[attr];
@@ -14,38 +28,10 @@ export function element(tag, attrs) {
   return el;
 }
 
-export function repeat(list, createElement) {
-  return list.map((item) => {
-    return createElement(item);
-  })
-}
-
-export function repeatfor(n, createElement) {
-  let children = [];
-  for (var i=0; i < n; i++) {
-    children.push(createElement(i));
-  }
-  return children;
-}
-
-function removeChildren(parent, children) {
-  children.forEach((child) => {
-    parent.removeChild(child);
-  });
-}
-
-function addChildren(parent, children) {
-  children.forEach(child => parent.appendChild(child));
-}
-
-function toListOfChildren(children) {
-  return [children].flat();
-}
-
-export function bind(state, callback) {
-  let oldChildren = toListOfChildren(callback(state, state.data));
-  state.on('*', () => {
-    let newChildren = toListOfChildren(callback(state, state.data));
+export function bind(observableVar, callback) {
+  let oldChildren = toListOfChildren(callback(observableVar.value));
+  observableVar.on((value) => {
+    let newChildren = toListOfChildren(callback(value));
     let parent = oldChildren[0].parentElement;
     if (parent) {
       removeChildren(parent, oldChildren);
@@ -56,40 +42,11 @@ export function bind(state, callback) {
   return oldChildren;
 }
 
-export function bindto(state, topic, callback) {
-  let oldChildren = toListOfChildren(callback(state.data[topic]));
-  state.on('*', () => {
-    let newChildren = toListOfChildren(callback(state.data[topic]));
-    let parent = oldChildren[0].parentElement;
-    if (parent) {
-      removeChildren(parent, oldChildren);
-      addChildren(parent, newChildren);
-    }
-    oldChildren = newChildren;
-  });
-  return oldChildren;
-}
-
-export function bindtext(state, topic) {
-  const el = element('span', {textContent: state.data[topic]});
-  state.on(topic, (_, data) => {
-    el.textContent = data[topic];
+export function bindtext(observableVar) {
+  const el = element('span', {textContent: observableVar.value});
+  observableVar.on((value) => {
+    el.textContent = value;
   });
   return el;
 }
-
-export function onpathchange(callback) {
-  let oldEl = callback(window.location.pathname);
-  window.addEventListener('popstate', () => {
-    let newEl = callback(window.location.pathname);
-    oldEl.parentElement.replaceChild(newEl, oldEl);
-    oldEl = newEl;
-  });
-  window.addEventListener('navigate', () => {
-    let newEl = callback(window.location.pathname);
-    oldEl.parentElement.replaceChild(newEl, oldEl);
-    oldEl = newEl;
-  });
-
-  return oldEl;
-}
+ 

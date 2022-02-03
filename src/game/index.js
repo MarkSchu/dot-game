@@ -1,27 +1,22 @@
-import { Observable } from 'utils/observable';
 import { Renderer } from '../renderer';
+import { ObservableVar } from '../utils/observable';
 
-
-export const Game = new Observable({
-  points: 0
-});
-
-// constants
-Game.minSpeed = 10; 
-Game.maxSpeed = 100;
-Game.minRadius = 5;
-Game.maxRadius = 50;
-
-// state
-Game.dots = [];
-Game.speed = 50; // [10, 100]
-
-Game.setSpeed = function(value) {
-  Game.speed = value;
-}
+export const Game = {
+  constants: {
+    minSpeed: 10,
+    maxSpeed: 100,
+    minRadius: 5,
+    maxRadius: 50,
+  },
+  state: {
+    dots: [],
+    speed: 50,  // between 10 and 100
+    points: new ObservableVar(0)
+  }
+};
 
 Game.getRandomRadius = function() {
-  return Math.floor(Game.minRadius + (Math.random() * Game.maxRadius));
+  return Math.floor(Game.constants.minRadius + (Math.random() * Game.constants.maxRadius));
 }
 
 Game.getRandomXCoord = function(radius) {
@@ -30,14 +25,14 @@ Game.getRandomXCoord = function(radius) {
 }
 
 Game.getPoints = function(radius) {
-  const minDiameter = Game.minRadius * 2;
-  const maxDiameter = Game.maxRadius * 2;
+  const minDiameter = Game.constants.minRadius * 2;
+  const maxDiameter = Game.constants.maxRadius * 2;
   const diameter = radius * 2;
   return (minDiameter + maxDiameter) - diameter;
 }
 
 Game.addPoints = function(points) {
-  Game.set({points: Game.data.points + points});
+  Game.state.points.set(Game.state.points.value + points);
 }
 
 Game.addDot = function() {
@@ -45,11 +40,11 @@ Game.addDot = function() {
   const x = Game.getRandomXCoord(radius);
   const y = -radius;
   const points = Game.getPoints(radius);
-  Game.dots.push({ x, y, radius, points })
+  Game.state.dots.push({ x, y, radius, points })
 }
 
 Game.removeDot = function(dot) {
-  Game.dots = Game.dots.filter(testdot => testdot !== dot);
+  Game.state.dots = Game.state.dots.filter(testDot => testDot !== dot);
 }
 
 Game.update = function(timeSinceLastSecond, fps) {
@@ -58,8 +53,8 @@ Game.update = function(timeSinceLastSecond, fps) {
     Game.addDot();
   }
   // update each dot position 
-  Game.dots.forEach((dot) => {
-    dot.y += (Game.speed / fps);
+  Game.state.dots.forEach((dot) => {
+    dot.y += (Game.state.speed / fps);
   });
 }
 

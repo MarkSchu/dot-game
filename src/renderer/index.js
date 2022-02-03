@@ -3,9 +3,9 @@ import { Game } from '../game';
 import { Loop } from '../loop';
 import './style.css';
 
-export const Renderer = {}
-
-Renderer.renderArea = svg('svg', {class: 'game-play-area'});
+export const Renderer = {
+  renderArea: svg('svg', {class: 'game-play-area'})
+}
 
 Renderer.DotBorder = function(dot) {
   const r = dot.radius + 10;
@@ -23,7 +23,6 @@ Renderer.DotBorder = function(dot) {
       cy: 0, 
       r,
       fill: 'transparent',
-      'stroke': document.documentElement.style.getProperty('--interface-color'),
       'stroke-width': 2,
       'stroke-dasharray': `${line1} ${gap1}`,
       opacity: 0.25
@@ -56,11 +55,11 @@ Renderer.DotBorder = function(dot) {
   )
 }
 
-Renderer.GlowArea = function(dot) {
+Renderer.DotGlowingArea = function(dot) {
 
   const handleClick = (e) => {
-    const el = e.target;
-    if (Loop.data.running) {
+    if (Loop.running.value) {
+      const el = e.target;
       const dotBorder = el.parentElement.children[0];
       dotBorder.children[1].beginElement();
       dotBorder.children[2].beginElement();
@@ -74,11 +73,11 @@ Renderer.GlowArea = function(dot) {
 
   return (
     svg('circle', {
+      class: 'dot-glowing-area',
       onclick: handleClick,
       cx: 0, 
       cy: 0, 
-      r: dot.radius,
-      fill: 'white',
+      r: dot.radius
     })
   )
 }
@@ -87,7 +86,7 @@ Renderer.Dot = function (dot) {
   return (
     svg('g', { transform: `translate(${dot.x}, ${dot.y})` },
       Renderer.DotBorder(dot),
-      Renderer.GlowArea(dot)
+      Renderer.DotGlowingArea(dot)
     )
   );
 }

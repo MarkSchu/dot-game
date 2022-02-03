@@ -1,10 +1,10 @@
-import { element, bindtext, bindto } from 'utils/dom';
+import { element, bindtext, bind } from 'utils/dom';
 import './style.css';
 
 function PointDisplay(Game) {
   return (
     element('div', {className: 'point-display'},
-      bindtext(Game, 'points')
+      bindtext(Game.state.points)
     )
   )
 }
@@ -12,11 +12,11 @@ function PointDisplay(Game) {
 function StartButton(Loop) {
 
   const handleClick = (e) => {
-    Loop.data.running ? Loop.stop() : Loop.start();
+    Loop.running.value ? Loop.stop() : Loop.start();
   }
 
   return (
-    bindto(Loop, 'running', (value) =>
+    bind(Loop.running, (value) =>
       element('button', {
         className: 'start-button',
         textContent: value ? 'Pause' : 'Start', 
@@ -29,16 +29,16 @@ function StartButton(Loop) {
 function SpeedSlider(Game) {
 
   const handleChange = (e) => {
-    Game.setSpeed(e.target.value);
+    Game.state.speed = e.target.value;
   }
   
   return (
     element('input', {
       className: 'speed-slider',
       type: 'range',
-      min: Game.minSpeed,
-      max: Game.maxSpeed,
-      value: Game.speed,
+      min: Game.constants.minSpeed,
+      max: Game.constants.maxSpeed,
+      value: Game.state.speed,
       oninput: handleChange
     })
   )

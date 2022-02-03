@@ -30,3 +30,25 @@ export class Observable {
     }
   }
 }
+
+export class ObservableVar {
+  constructor(value) {
+    this.value = value;
+    this.callbacks =[];
+  }
+
+  on(callback) {
+    this.callbacks.push(callback);
+  }
+
+  emit() {
+    this.callbacks.forEach((callback) => {
+      callback(this.value);
+    });
+  }
+
+  set(value) {
+    this.value = value;
+    this.emit();
+  }
+}

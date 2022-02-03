@@ -3,3 +3,11 @@
   position: relative;
   z-index: 0;
 }
+
+.dot-glowing-area {
+  fill: white;
+}
+
+.dot-border {
+  stroke: var(--interface-color);
+}
