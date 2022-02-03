@@ -6,6 +6,7 @@
 
 .dot-glowing-area {
   fill: white;
+  cursor: pointer;
 }
 
 .dot-border {

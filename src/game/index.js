@@ -10,7 +10,7 @@ export const Game = {
   },
   state: {
     dots: [],
-    speed: 50,  // between 10 and 100
+    speed: 55,  // between 10 and 100
     points: new ObservableVar(0)
   }
 };
