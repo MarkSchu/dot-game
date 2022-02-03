@@ -24,11 +24,10 @@ Game.getRandomXCoord = function(radius) {
   return Math.floor(radius + (Math.random() * (renderAreaWidth - (radius * 2))));
 }
 
+// the smallest dots are worth 10 points, and the largest dots worth 1 point.
 Game.getPoints = function(radius) {
-  const minDiameter = Game.constants.minRadius * 2;
-  const maxDiameter = Game.constants.maxRadius * 2;
   const diameter = radius * 2;
-  return (minDiameter + maxDiameter) - diameter;
+  return  Math.floor(10 - (diameter / 10 - 1));
 }
 
 Game.addPoints = function(points) {

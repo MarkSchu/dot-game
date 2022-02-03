@@ -81,7 +81,7 @@
 .control-panel .start-button,
 .control-panel .speed-label,
 .control-panel .speed-slider {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--interface-font);
   color: var(--interface-color);
 }
 

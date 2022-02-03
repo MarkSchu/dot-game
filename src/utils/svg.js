@@ -1,9 +1,12 @@
 function addAttrs(el, attrs) {
   for (const attr in attrs) {
-    if (attr === 'onclick') {
-      el[attr] = attrs[attr];
-    } else {
-      el.setAttribute(attr, attrs[attr]);
+    switch (attr) {
+      case 'onclick':
+      case 'textContent':
+        el[attr] = attrs[attr];
+        break;
+      default:
+        el.setAttribute(attr, attrs[attr]);
     }
   }
 }

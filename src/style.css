@@ -1,5 +1,6 @@
 :root {
   --interface-color: #00ffff;
+  --interface-font: 'Courier New', Courier, monospace;
 }
 
 * {

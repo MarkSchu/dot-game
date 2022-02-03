@@ -4,7 +4,8 @@ import { Loop } from '../loop';
 import './style.css';
 
 export const Renderer = {
-  renderArea: svg('svg', {class: 'game-play-area'})
+  renderArea: svg('svg', {class: 'game-play-area'}),
+  clickAnimationDuration: 400
 }
 
 Renderer.DotBorder = function(dot) {
@@ -40,7 +41,7 @@ Renderer.DotBorder = function(dot) {
       svg('animate', {
           attributeName: 'stroke-dasharray',
           values: `${line1} ${gap1}; ${line2} ${gap2}; ${line1} ${gap1}`,
-          dur: '0.4s',
+          dur: `${Renderer.clickAnimationDuration}ms`,
           begin: 'indefinite',
           fill: 'freeze'
         }),
@@ -48,7 +49,7 @@ Renderer.DotBorder = function(dot) {
         attributeName: 'opacity',
         values: '0.25; 1.0; 0',
         begin: 'indefinite',
-        dur: '0.4s',
+        dur: `${Renderer.clickAnimationDuration}ms`,
         fill: 'freeze'
       })
     )
@@ -59,15 +60,17 @@ Renderer.DotGlowingArea = function(dot) {
 
   const handleClick = (e) => {
     if (Loop.running.value) {
-      const el = e.target;
-      const dotBorder = el.parentElement.children[0];
-      dotBorder.children[1].beginElement();
-      dotBorder.children[2].beginElement();
+      const dotGlowingArea = e.target;
+      dotGlowingArea.onclick = null;
+      const dotSvg = dotGlowingArea.parentElement;
+      const dotBorder = dotSvg.children[0];
+      dotBorder.children[1].beginElement(); // closer border
+      dotBorder.children[2].beginElement(); // increase border opacity
       setTimeout(() => {
         Game.addPoints(dot.points)
         Game.removeDot(dot);
-        Renderer.removeDotSvg(el);
-      }, 400)
+        Renderer.removeDotSvg(dotSvg);
+      }, Renderer.clickAnimationDuration)
     }
   }
 
@@ -92,17 +95,17 @@ Renderer.Dot = function (dot) {
 }
 
 Renderer.getRenderAreaWidth = function() {
-  return this.renderArea.clientWidth;
+  return Renderer.renderArea.clientWidth;
 }
 
-Renderer.removeDotSvg = function(el) {
-  el.parentElement.removeChild(el);
+Renderer.removeDotSvg = function(dotSvg) {
+  Renderer.renderArea.removeChild(dotSvg);
 }
 
 Renderer.addDotSvg = function(dot) {
   const dotSvg = Renderer.Dot(dot);
   dot.svg = dotSvg;
-  this.renderArea.appendChild(dotSvg);
+  Renderer.renderArea.appendChild(dotSvg);
 }
 
 Renderer.renderDot = function(dot) {
@@ -110,6 +113,11 @@ Renderer.renderDot = function(dot) {
     Renderer.addDotSvg(dot);
   }
   dot.svg.setAttribute('transform', `translate(${dot.x}, ${dot.y})`);
+  
+  if (dot.y - dot.radius > Renderer.renderArea.clientHeight) {
+    Game.removeDot(dot);
+    Renderer.removeDotSvg(dot.svg);
+  }
 }
 
 Renderer.render = function(dots) {

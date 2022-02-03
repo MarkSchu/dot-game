@@ -6,9 +6,15 @@
 
 .dot-glowing-area {
   fill: white;
-  cursor: pointer;
 }
 
 .dot-border {
   stroke: var(--interface-color);
+}
+
+.dot-points-text {
+  fill: var(--interface-color);
+  font-size: 22px;
+  font-family: var(--interface-font);
+  font-weight: 700;
 }
