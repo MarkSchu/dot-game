@@ -26,7 +26,7 @@ Loop.cycle = function(loopTime) {
     window.requestAnimationFrame(Loop.cycle);
     return;
   }
-  // pre update
+
   const timeBetweenLoops = loopTime - Loop.lastLoopTime;
   const timeSinceLastSecond = Loop.timeSinceLastSecond + timeBetweenLoops;
   const fps = 1 / ((loopTime - Loop.lastLoopTime) / 1000);
@@ -37,8 +37,9 @@ Loop.cycle = function(loopTime) {
   Loop.lastLoopTime = loopTime;
   Loop.timeSinceLastSecond = timeSinceLastSecond >= 1000 ? 0 : timeSinceLastSecond;
 
-  if (Loop.data.running)
+  if (Loop.data.running) {
     window.requestAnimationFrame(Loop.cycle);
-  else 
+  } else {
     Loop.lastLoopTime = null;
+  }
 }
