@@ -1,7 +1,5 @@
 .control-panel-container {
-
   --panel-margin: 8px;
-
   position: relative;
   height: 155px;
   margin-top: calc(2 * var(--panel-margin));
@@ -14,6 +12,7 @@
   bottom: 0;
   left: var(--panel-margin);
   right: var(--panel-margin);
+  background-color: black;
   padding: 24px 32px;
   border: 1px solid var(--interface-color);
   filter: drop-shadow(0 0 6px var(--interface-color));
@@ -113,12 +112,10 @@
   cursor: pointer;
 }
 
-.control-panel .start-button:hover {
-  filter: drop-shadow(0 0 4px white);
-}
-
-.control-panel .start-button:active {
-  filter: drop-shadow(0 0 0px white);
+.control-panel .start-button.running {
+  background-color: var(--interface-color);
+  color: black;
+  filter: drop-shadow(0 0 4px var(--interface-color));
 }
 
 .control-panel .speed-slider::-webkit-slider-thumb {

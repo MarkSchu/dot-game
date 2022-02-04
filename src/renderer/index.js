@@ -1,12 +1,15 @@
 import { svg } from 'utils/svg';
+import { repeatfor } from 'utils/dom';
 import { Game } from '../game';
 import { Loop } from '../loop';
 import './style.css';
 
 export const Renderer = {
-  renderArea: svg('svg', {class: 'game-play-area'}),
+  renderArea: null,
   clickAnimationDuration: 400
 }
+
+Renderer.renderArea = svg('svg', {class: 'game-play-area'});
 
 Renderer.DotBorder = function(dot) {
   const r = dot.radius + 10;

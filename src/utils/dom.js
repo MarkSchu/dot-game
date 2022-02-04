@@ -50,3 +50,10 @@ export function bindtext(observableVar) {
   return el;
 }
  
+export function repeatfor(n, createElement) {
+  let children = [];
+  for (var i=0; i < n; i++) {
+    children.push(createElement(i));
+  }
+  return children;
+}
