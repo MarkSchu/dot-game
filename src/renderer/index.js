@@ -64,12 +64,13 @@ Renderer.DotGlowingArea = function(dot) {
   const handleClick = (e) => {
     if (Loop.running.value) {
       const dotGlowingArea = e.target;
-      dotGlowingArea.onclick = null;
+      dotGlowingArea.onclick = null;  // prevent further clicks
       const dotSvg = dotGlowingArea.parentElement;
       const dotBorder = dotSvg.children[0];
       dotBorder.children[1].beginElement(); // closer border
       dotBorder.children[2].beginElement(); // increase border opacity
       setTimeout(() => {
+        
         Game.addPoints(dot.points)
         Game.removeDot(dot);
         Renderer.removeDotSvg(dotSvg);

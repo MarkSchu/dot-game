@@ -19,7 +19,7 @@ function StartButton(Loop) {
     bind(Loop.running, (value) =>
       element('button', {
         className: `start-button ${value ? 'running' : ''}`,
-        textContent: value ? 'Pause' : 'Start', 
+        textContent: value ? 'pause' : 'start', 
         onclick: handleClick
       })
     )

@@ -18,40 +18,5 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.app .grid {
-  position: absolute;
   background-color: black;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-}
-
-.app .grid .horizontal-grid-line,
-.app .grid .vertical-grid-line {
-  position: absolute;
-  opacity: 0.5;
-}
-
-.app .grid .horizontal-grid-line {
-  height: 1px;
-  background-color: #ff00ff;
-  width: 100%;
-}
-
-.app .grid .vertical-grid-line {
-  width: 1px;
-  background-color: #ff00ff;
-  height: 100%;;
-}
-
-.app .grid .box-shadow {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  box-shadow: inset 0px 0px 120px 40px #000;
 }
