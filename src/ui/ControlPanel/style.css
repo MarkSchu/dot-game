@@ -99,6 +99,11 @@
   margin-bottom: var(--panel-margin);
 }
 
+.control-panel .speed-label,
+.control-panel .start-button {
+  font-size: 18px;
+}
+
 .control-panel .speed-label {
   display: block;
 }
