@@ -11,6 +11,38 @@ export const Renderer = {
 
 Renderer.renderArea = svg('svg', {class: 'game-play-area'});
 
+Renderer.getPointDisplayHeight = (y) => {
+  const minY = 24;
+  const maxY = Renderer.renderArea.clientHeight - 4;
+  if (y < minY) {
+    return minY;
+  } else if (y > maxY) {
+    return maxY;
+  } else {
+    return y;
+  }
+}
+
+Renderer.PointDisplay = function(x, y, points) {
+  return (
+    svg('text', {
+      class: 'point-display-text',
+      x,
+      y: Renderer.getPointDisplayHeight(y),
+      'text-anchor': 'middle',
+      textContent: points,
+    })
+  )
+}
+
+Renderer.displayPoints = function(dot) {
+  const el = Renderer.PointDisplay(dot.x, dot.y, dot.points);
+  Renderer.renderArea.appendChild(el);
+  setTimeout(() => {
+    Renderer.renderArea.removeChild(el);
+  }, 500);
+}
+
 Renderer.DotBorder = function(dot) {
   const r = dot.radius + 10;
   const p = 2 * Math.PI * r;  
@@ -29,7 +61,7 @@ Renderer.DotBorder = function(dot) {
       fill: 'transparent',
       'stroke-width': 2,
       'stroke-dasharray': `${line1} ${gap1}`,
-      opacity: 0.25
+      opacity: 0.5
     },
       svg('animateTransform', {
         attributeName: 'transform',
@@ -70,10 +102,10 @@ Renderer.DotGlowingArea = function(dot) {
       dotBorder.children[1].beginElement(); // closer border
       dotBorder.children[2].beginElement(); // increase border opacity
       setTimeout(() => {
-        
+        Renderer.removeDotSvg(dotSvg);
+        Renderer.displayPoints(dot);
         Game.addPoints(dot.points)
         Game.removeDot(dot);
-        Renderer.removeDotSvg(dotSvg);
       }, Renderer.clickAnimationDuration)
     }
   }
@@ -118,7 +150,8 @@ Renderer.renderDot = function(dot) {
   }
   dot.svg.setAttribute('transform', `translate(${dot.x}, ${dot.y})`);
   
-  if (dot.y - dot.radius > Renderer.renderArea.clientHeight) {
+  // clean up dots that fall below the game area
+  if ((dot.y - dot.radius) > Renderer.renderArea.clientHeight) {
     Game.removeDot(dot);
     Renderer.removeDotSvg(dot.svg);
   }

@@ -16,7 +16,9 @@ export const Game = {
 };
 
 Game.getRandomRadius = function() {
-  return Math.floor(Game.constants.minRadius + (Math.random() * Game.constants.maxRadius));
+  return Math.floor(
+    Game.constants.minRadius + (Math.random() * (Game.constants.maxRadius - Game.constants.minRadius))
+  );
 }
 
 Game.getRandomXCoord = function(radius) {

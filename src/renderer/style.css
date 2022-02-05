@@ -12,9 +12,11 @@
   stroke: var(--interface-color);
 }
 
-.dot-points-text {
+.point-display-text {
   fill: var(--interface-color);
   font-size: 22px;
   font-family: var(--interface-font);
   font-weight: 700;
+  filter: drop-shadow(0 0 5px var(--interface-color))
 }
+
