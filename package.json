@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "start": "netlify dev"
+    "start": "http-server -c-1"
   },
   "author": "Mark Schumaker",
   "license": "ISC",
