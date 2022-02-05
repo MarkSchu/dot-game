@@ -9,3 +9,6 @@ Here's how to run on your machine:
 4. Build: `npm run build`
 5. Run: `npm run start`
 6. Go to `http://localhost:8080/` in chrome
+
+## See it Live
+To play the game live, go to https://cranky-williams-0031ff.netlify.app/
